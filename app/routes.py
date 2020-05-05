@@ -4,6 +4,7 @@ from app import app
 from app.forms import URLForm
 from app.models.article import Article
 from app.scrap import Scrap as scr
+from app.scrap import tojson as tjs
 
 #Home page that shows the 'get url' form
 @app.route('/')
@@ -11,6 +12,7 @@ from app.scrap import Scrap as scr
 def index():
     form = URLForm()
     return render_template('index.html', form=form)
+
 
 @app.route('/articles',methods=['POST'])
 def articles():
@@ -22,10 +24,19 @@ def articles():
         for article in articles[0:4]:
             b=scr.ScrapArticles()
             b.run(article,url)
-            r.append(b.headline)
+            headline=b.headline
+            authors=b.authors
+            content=b.content
+            url_art=b.url
+            summary=b.summary
+            keywords=b.keywords
+            json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
+            article = Article(**json).save()
+            r.append(article.id)
         return str(r)
     return redirect(url_for('index'))
     #articles=Article.objects.to_json()
     #return Response(articles,mimetype="application/json",status=200)
     #form = URLForm()
     #return render_template('index.html', form=form)
+    

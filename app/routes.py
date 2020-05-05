@@ -24,15 +24,16 @@ def articles():
         for article in articles[0:4]:
             b=scr.ScrapArticles()
             b.run(article,url)
-            headline=b.headline
-            authors=b.authors
             content=b.content
-            url_art=b.url
-            summary=b.summary
-            keywords=b.keywords
-            json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
-            article = Article(**json).save()
-            r.append(article.id)
+            if content!='':
+                headline=b.headline
+                authors=b.authors
+                url_art=b.url
+                summary=b.summary
+                keywords=b.keywords
+                json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
+                article = Article(**json).save()
+                r.append([article.id,article.content])
         return str(r)
     return redirect(url_for('index'))
     #articles=Article.objects.to_json()

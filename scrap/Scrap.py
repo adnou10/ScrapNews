@@ -9,19 +9,20 @@ Created on Mon May  4 22:38:42 2020
 from bs4 import BeautifulSoup
 import urllib.request
 
+
+# get html page    
+def getHTMLPage(link):
+    page = urllib.request.urlopen(link)                         # query the website and return the html to the variable 'page'
+    soup = BeautifulSoup(page, 'html.parser')                       # parse the html using beautiful soup and store in variable 'soup'
+    return soup
+
 class ScrapPage(object):
       def __init__(self,link):
           self.link=link      # page's url to crawl ex: www.bbc.com
-         
-      # get html page    
-      def getHTMLPage(self):
-          page = urllib.request.urlopen(self.link)                         # query the website and return the html to the variable 'page'
-          soup = BeautifulSoup(page, 'html.parser')                       # parse the html using beautiful soup and store in variable 'soup'
-          return soup
-      
+              
       # find all articles in page 
       def Articles(self):
-          soup=self.getHTMLPage()
+          soup=getHTMLPage(self.link)
           articles = soup.find_all('div', attrs={'class': 'media__content'})
           return articles
       
@@ -33,13 +34,7 @@ class ScrapArticles(object):
         self.headline=''
         self.authors=[]
         self.content=''
-        
-         #get the article's story
-    def story(self):
-        page = urllib.request.urlopen(self.url)                         # query the website and return the html to the variable 'page'
-        soup = BeautifulSoup(page, 'html.parser')                       # parse the html using beautiful soup and store in variable 'soup'
-        div = soup.find('div', attrs={'class': 'story-body'})              # get the story's body
-        return div
+        self.keywords=[]
     
     # get the composants of the article
     def run(self,article,link): 
@@ -47,7 +42,8 @@ class ScrapArticles(object):
         summ = article.find('p', attrs={'class': 'media__summary'})               # article's summary
         if summ!= None:
              self.summary=summ.text
-        body=self.story()
+        soup=getHTMLPage(self.url)
+        body = soup.find('div', attrs={'class': 'story-body'})
         self.headline= body.find('h1', attrs={'class': 'story-body__h1'}).text            # get the headline of the article
         authors_txt = body.find('span', attrs={'class': 'byline__name'})           # get the authors of the article
         if authors_txt!= None:
@@ -59,7 +55,16 @@ class ScrapArticles(object):
         for i in content.find_all(['script','figure','div']):                        # Clean the content from superflu
                i.decompose()
         self.content=content.text
+        tags=soup.find('ul', attrs={'class': 'tags-list'}).find_all('li')
+        for i in tags:
+            keyword=i.text
+            self.keywords.append(keyword)
+
         
+
+
+
+
 """link='https://www.bbc.com'       
 a=ScrapPage(link)        
 articles=a.Articles()    
@@ -71,5 +76,5 @@ for article in articles[0:4]:
     print(b.content)
     print(b.url)
     print(b.summary)
-
+    print(b.keywords)
 """

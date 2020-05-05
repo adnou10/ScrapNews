@@ -2,5 +2,16 @@
 
 {% block content %}
         <h1> Welcome to Your ScrapNews Application! </h1>
-        
+        <div>
+        <h3> Please Enter URL of The News Website</h3>
+        <form action="{{ url_for('index') }}" method="post" >
+         {{ form.hidden_tag() }}
+        <p>
+            {{ form.url.label }}<br>
+            {{ form.url() }}
+        </p>
+      
+        <p>{{ form.submit() }}</p>
+        </form>
+        </div>
 {% endblock %}

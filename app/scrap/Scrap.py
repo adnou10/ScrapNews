@@ -19,14 +19,14 @@ def getHTMLPage(link):
     return soup
 
 class ScrapPage(object):
-      def __init__(self,link):
-          self.link=link      # page's url to crawl ex: www.bbc.com
+    def __init__(self,link):
+        self.link=link      # page's url to crawl ex: www.bbc.com
               
-      # find all articles in page 
-      def Articles(self):
-          soup=getHTMLPage(self.link)
-          articles = soup.find_all('div', attrs={'class': 'media__content'})
-          return articles
+    # find all articles in page 
+    def Articles(self):
+        soup=getHTMLPage(self.link)
+        articles = soup.find_all('div', attrs={'class': 'media__content'})
+        return articles
       
 class ScrapArticles(object):
     

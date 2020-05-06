@@ -13,8 +13,8 @@ def index():
     form = URLForm()
     return render_template('index.html', form=form)
 
-
-@app.route('/articles',methods=['POST'])
+@app.route('/all')
+@app.route('/articles',methods=['GET','POST'])
 def articles():
     if request.method == 'POST':
         url=request.form.get('url')
@@ -36,6 +36,9 @@ def articles():
                 r.append([article.id,article.content])
         arts=Article.objects
         return  render_template('articles.html',arts=arts)   #display articles in db
+    if request.method == 'GET':
+        arts=Article.objects
+        return  render_template('articles.html',arts=arts) 
     return redirect(url_for('index'))
 
 # To see article's detail 

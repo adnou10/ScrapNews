@@ -14,7 +14,7 @@ def index():
     return render_template('index.html', form=form)
 
 
-@app.route('/articles',methods=['POST'])
+@app.route('/articles',methods=['GET','POST'])
 def articles():
     if request.method == 'POST':
         url=request.form.get('url')
@@ -34,7 +34,10 @@ def articles():
                 json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
                 article = Article(**json).save()
                 r.append([article.id,article.content])
-        arts=Article.objects
+        arts=Article.objects 
+        return  render_template('articles.html',arts=arts)   #display articles in db
+    elif request.method == 'GET':
+        arts=Article.objects 
         return  render_template('articles.html',arts=arts)   #display articles in db
     return redirect(url_for('index'))
 

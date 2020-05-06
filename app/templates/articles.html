@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table">
+               
+        <tbody>
+            {% for a in arts %}
+            <tr>
+                <td>{{a['headline']}} </td> 
+                <td><a href="/disp/{{a['id']}}"> See Article </a></td>                       
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+{% endblock %}

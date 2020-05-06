@@ -21,7 +21,7 @@ def articles():
         page=scr.ScrapPage(url)            # Using our Scrap module to scrap the website
         articles=page.Articles()
         r=[]
-        for article in articles[0:4]:
+        for article in articles[0:5]:
             b=scr.ScrapArticles()
             b.run(article,url)
             content=b.content
@@ -34,10 +34,14 @@ def articles():
                 json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
                 article = Article(**json).save()
                 r.append([article.id,article.content])
-        return str(r)
+        arts=Article.objects
+        return  render_template('articles.html',arts=arts)   #display articles in db
     return redirect(url_for('index'))
-    #articles=Article.objects.to_json()
-    #return Response(articles,mimetype="application/json",status=200)
-    #form = URLForm()
-    #return render_template('index.html', form=form)
+
+# To see article's detail 
+@app.route("/disp/<id>") 
+def display(id):
+    art=Article.objects.get(id=id)
+    return render_template('article.html',art=art)
+    #return render_template('display.html',arh=arh,cont=arc)
     

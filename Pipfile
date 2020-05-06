@@ -12,6 +12,7 @@ flask-mongoengine = "*"
 dnspython = "*"
 beautifulsoup4 = "*"
 requests = "*"
+flask-restful = "*"
 
 [requires]
 python_version = "3.7"

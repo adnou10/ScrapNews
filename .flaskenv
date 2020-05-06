@@ -1,1 +1,2 @@
 FLASK_APP=scrapp.py
+FLASK_DEBUG=TRUE

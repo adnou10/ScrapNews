@@ -13,11 +13,7 @@ def index():
     form = URLForm()
     return render_template('index.html', form=form)
 
-<<<<<<< HEAD
-@app.route('/all')
-=======
 
->>>>>>> scrapApp
 @app.route('/all')
 @app.route('/articles',methods=['GET','POST'])
 def articles():

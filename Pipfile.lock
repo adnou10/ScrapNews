@@ -1,10 +1,7 @@
 {
     "_meta": {
         "hash": {
-<<<<<<< HEAD
             "sha256": "a35c960690b369930094549ce085c0de72188cc86e6ab2709da8b54a30c8816f"
-=======
->>>>>>> restapi
         },
         "pipfile-spec": 6,
         "requires": {

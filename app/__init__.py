@@ -14,15 +14,12 @@ app.config.from_object(Config)
 
 
 #import our routes and models files
-<<<<<<< HEAD
 from app import routes, models, errors
-=======
 from app import routes, models
 from app.webapi import endp, apierrors
->>>>>>> restapi
 
 #Create api object
-api = Api(app,errors=errors)
+api = Api(app,errors=apierrors)
 #database initialization
 models.db.initialize_db(app)
 

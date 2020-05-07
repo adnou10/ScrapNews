@@ -21,7 +21,7 @@ def articles():
         page=scr.ScrapPage(url)            # Using our Scrap module to scrap the website
         articles=page.Articles()
         r=[]
-        for article in articles[0:5]:
+        for article in articles:
             b=scr.ScrapArticles()
             b.run(article,url)
             content=b.content

@@ -11,13 +11,15 @@ app = Flask(__name__)
 #Configurate app object
 app.config.from_object(Config)
 
-#Create api object
-api = Api(app)
+
 
 #import our routes and models files
 from app import routes, models
 from app.webapi import endp
+from app.errors import errors
 
+#Create api object
+api = Api(app,errors=errors)
 #database initialization
 models.db.initialize_db(app)
 

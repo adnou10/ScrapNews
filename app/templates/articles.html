@@ -1,16 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <table class="table">
+    <form class="form-inline mr-auto" action='/search' method="post" >
+    <div class="form-group" style="margin:50px;"><input class="form-control search-field" type="search" name="key" id="key"/><label for="key"> <div style="margin:10px;"><i class="fa fa-search"></i></div></label></div>
+    </form>
+<div> </div>
+    <div class="table-responsive" style="padding-left:100px;">
+    <h3 style="margin-left:50px;">Articles: </h3>
+    <table class="table" style="">
                
         <tbody>
             {% for a in arts %}
             <tr>
-                <td>{{a['headline']}} </td> 
-                <td><a href="/disp/{{a['id']}}"> See Article </a></td>                       
+                <td style="width:70px">{{a['headline']}} </td> 
+                <td style="width:50px"><a href="/disp/{{a['id']}}"> See Article </a></td>                       
             </tr>
             {% endfor %}
         </tbody>
     
     </table>
+</div>
 {% endblock %}

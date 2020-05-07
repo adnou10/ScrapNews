@@ -9,6 +9,6 @@ def not_found_error(error):
 def internal_error(error):
     return render_template('500.html'), 500
 
-@app.errorhandler(Exception)
+'''@app.errorhandler(Exception)
 def unhandled_exception(e):
-    return render_template('excep.html'), 500
+    return render_template('excep.html'), 500'''

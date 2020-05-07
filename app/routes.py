@@ -10,9 +10,13 @@ from app.scrap import tojson as tjs
 @app.route('/')
 @app.route('/index')
 def index():
-    form = URLForm()
+    form=URLForm()
     return render_template('index.html', form=form)
 
+@app.route("/apage/")
+def Apage():
+    s='ok'
+    return render_template('apage.html',st=s)
 
 @app.route('/all')
 @app.route('/articles',methods=['GET','POST'])
@@ -51,4 +55,20 @@ def display(id):
     art=Article.objects.get(id=id)
     return render_template('article.html',art=art)
     #return render_template('display.html',arh=arh,cont=arc)
-    
+
+@app.route("/search",methods=['GET','POST'])
+def key():
+    if request.method == 'POST':
+        key=request.form.get('key')
+        arts=Article.objects(keywords=key)
+        return  render_template('articles.html',arts=arts)   #display articles in db
+    else:
+        return redirect(url_for('articles'))
+
+@app.route("/asearch",methods=['GET','POST'])
+def asearch():
+    if request.method == 'POST':
+        key=request.form.get('key')
+        return  redirect('/api/articles/'+key)   #display articles in db
+    else:
+        return redirect(url_for('articles'))       

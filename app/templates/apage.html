@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div> <h3 style="margin:50px;">ScrapNews provide an Api to access scraped articles from a Mongo database </h3></div>
+
+<div style="margin:50px;">       <h4> To access it use: </h4></div>
+ 
+  <div class="table-responsive" style="width:798px;margin:50px;">
+       <table class="table">
+               
+        <tbody>
+            <tr>
+                <td>To get all articles :<br> add '/api/articles' to the base link </td> 
+                <td>or <a href="/api/articles"> click here </a></td>                       
+            </tr>
+            <tr>
+                <td>To get  articles by keyword :<br> add "/api/articlesd/keyword" to the base link and replace keyword by the one you want to use to look for your articles </td> 
+                <td>or Enter the keyword here <form class="form-inline mr-auto" action='/asearch' method="post" >
+    <input class="form-control search-field" type="search" name="key" id="key"/>
+     and <input class="btn btn-primary btn-block",style="background-color:rgb(48,128,41);" type="submit" value="click here" style="background-color:green;"/> </form></td>                       
+            </tr>
+        </tbody>
+    
+    </table>
+   </div>
+    
+{% endblock %}

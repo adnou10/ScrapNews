@@ -9,3 +9,4 @@ from wtforms.validators import url
 class URLForm(FlaskForm):
     url = URLField('URL',validators=[url(),DataRequired()])
     submit = SubmitField('Scrap')
+    

@@ -10,7 +10,7 @@ app.config.from_object(Config)
 
 
 #import our routes and models files
-from app import routes, models
+from app import routes, models, errors
 
 #database initialization
 models.db.initialize_db(app)

@@ -13,6 +13,11 @@ def index():
     form = URLForm()
     return render_template('index.html', form=form)
 
+<<<<<<< HEAD
+@app.route('/all')
+=======
+
+>>>>>>> scrapApp
 @app.route('/all')
 @app.route('/articles',methods=['GET','POST'])
 def articles():
@@ -21,7 +26,7 @@ def articles():
         page=scr.ScrapPage(url)            # Using our Scrap module to scrap the website
         articles=page.Articles()
         r=[]
-        for article in articles[0:5]:
+        for article in articles:
             b=scr.ScrapArticles()
             b.run(article,url)
             content=b.content
@@ -34,7 +39,10 @@ def articles():
                 json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
                 article = Article(**json).save()
                 r.append([article.id,article.content])
-        arts=Article.objects
+        arts=Article.objects 
+        return  render_template('articles.html',arts=arts)   #display articles in db
+    elif request.method == 'GET':
+        arts=Article.objects 
         return  render_template('articles.html',arts=arts)   #display articles in db
     if request.method == 'GET':
         arts=Article.objects

@@ -12,7 +12,12 @@ flask-mongoengine = "*"
 dnspython = "*"
 beautifulsoup4 = "*"
 requests = "*"
+<<<<<<< HEAD
 flask-testing = "*"
+=======
+flask-testing = "*"
+flask-restful = "*"
+>>>>>>> restapi
 
 [requires]
 python_version = "3.7"

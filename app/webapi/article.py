@@ -6,20 +6,20 @@ from flask_restful import Resource
 
 
 #Let's define our class ArticlesAPi 
-#class ArticlesApi(Resource):
+class ArticlesApi(Resource):
     # to get all Articles
-    #def get(self):
-    #        articles=Article.objects.to_json()
-    #        return Response(articles,mimetype="application/json",status=200)
+    def get(self):
+            articles=Article.objects.to_json()
+            return Response(articles,mimetype="application/json",status=200)
         
     
     
     #To add articles to the db
-    #def post(self):
-    #    body = request.get_json()
-    #    article = Article(**body).save()
-    #    id = article.id
-    #    return {'id': str(id)}, 200
+    def post(self):
+        body = request.get_json()
+        article = Article(**body).save()
+        id = article.id
+        return {'id': str(id)}, 200
 
 #BK stands for by keyword
 class ArticlesBKApi(Resource):

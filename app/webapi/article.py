@@ -36,11 +36,12 @@ class ArticlesApi(Resource):
 class ArticlesBKApi(Resource):
     #To get articles by keyword
     def get(self,keyword):
-        #try:
-            articles=Article.objects.get(keywords=keyword).to_json()
+        try:
+            articles=Article.objects(keywords=keyword).to_json()
             return Response(articles,mimetype="application/json",status=200)
-        #except DoesNotExist:
-        #    raise ArticleNotExistsError
-        #except Exception:
-        #    raise InternalServerError
+        except DoesNotExist:
+            raise ArticleNotExistsError
+        except Exception:
+            raise InternalServerError
     
+        

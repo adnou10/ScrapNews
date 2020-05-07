@@ -1,3 +1,4 @@
+
 class InternalServerError(Exception):
     pass
 
@@ -14,10 +15,10 @@ errors = {
     },
      "SchemaValidationError": {
          "message": "Request is missing required fields ",
-         "status": 400
+         "status": 404
      },
      "ArticleNotExistsError": {
          "message": "Articles with given keyword doesn't exists",
-         "status": 400
+         "status": 500
      }
 }

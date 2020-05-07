@@ -2,9 +2,9 @@
 from flask import Response, request
 from app.models.article import Article
 from flask_restful import Resource
-from mongoengine.errors import FieldDoesNotExist, DoesNotExist, ValidationError, InvalidQueryError
+from mongoengine.errors import FieldDoesNotExist, DoesNotExist, ValidationError 
 
-from app.errors import SchemaValidationError, InternalServerError, ArticleNotExistsError
+from .errors import SchemaValidationError, InternalServerError, ArticleNotExistsError
 
 
 #Let's define our class ArticlesAPi 

@@ -15,8 +15,7 @@ app.config.from_object(Config)
 
 #import our routes and models files
 from app import routes, models
-from app.webapi import endp
-from app.errors import errors
+from app.webapi import endp, errors
 
 #Create api object
 api = Api(app,errors=errors)

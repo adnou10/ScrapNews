@@ -43,3 +43,9 @@ The application was build using:
  ---------------
 
  - heroku
+ 
+ ### Deployement:
+ ---------------
+ https://scrap-news.herokuapp.com/
+ 
+ issue: needs to create a job for scraping as it take much time , thus the server stop the request.

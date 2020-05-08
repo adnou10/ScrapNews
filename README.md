@@ -8,7 +8,7 @@ This is a web application for scraping news articles from [bbc news website](htt
 ### Functionalities
 ---------------
  - Scrap News website
- - Store articles in MongoDb Atlas as a document of shape :
+ - Store articles in MongoDb Atlas as a document of shape :  
  {
     'summary':<summary>,
     'authors':<authors>,
@@ -34,9 +34,9 @@ The application was build using:
 ---------------
  
  - For now it only works on the "https://www.bbc.com/" website.
- - Don't scrap all articles
+ - Don't scrap all articles.  
  WHY?
- Because of the way I used bs4 in scraping was based on this url, I can say it lacks dynamicity)
+ Because of the way I used bs4 in scraping was based on this url, I can say it lacks dynamicity
  - Requires more tests
 
 ### Hosting:

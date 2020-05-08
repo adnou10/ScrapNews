@@ -9,14 +9,14 @@ This is a web application for scraping news articles from [bbc news website](htt
 ---------------
  - Scrap News website
  - Store articles in MongoDb Atlas as a document of shape :  
- {  
-    'summary':article's summary,  
-    'authors':article's authors,  
-    'content':article's content,  
-    'url':article's url,             
-    'headline':article's headline,  
-    'keywords':article's keywords,  
-} 
+        {  
+           'summary': article's summary,  
+           'authors': article's authors,  
+           'content': article's content,  
+           'url': article's url,             
+           'headline': article's headline,  
+           'keywords': article's keywords,  
+       } 
  - Display the articles collection .
  - Provide search for articles by keyword .
  - Offers an API that provides access to the content in the mongo database.

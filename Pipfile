@@ -13,9 +13,8 @@ dnspython = "*"
 beautifulsoup4 = "*"
 requests = "*"
 flask-testing = "*"
-
 flask-restful = "*"
- 
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

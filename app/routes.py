@@ -66,7 +66,7 @@ def result(job_key):
 @app.route('/all')
 @app.route('/articles')
 def articles():
-    art=Article.objects()
+    arts=Article.objects()
     return  render_template('articles.html',arts=arts)   #display articles in db
     
     #return redirect(url_for('index'))

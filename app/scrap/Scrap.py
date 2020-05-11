@@ -1,14 +1,55 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May  4 22:38:42 2020
-
-@author: NOUHAILA
-"""
 
 # import libraries
 from bs4 import BeautifulSoup
 from requests import get
+from urllib.parse import  urljoin
 
+
+ 
+def get_content(storyBody):
+    content=''
+    for i in storyBody.find_all(['script','figure','style']):
+        i.decompose()
+    for i in storyBody.find_all(attrs={'class':'with-extracted-share-icons'}):
+        i.decompose()
+    if storyBody != None:
+        content = storyBody.text
+    return content
+
+def get_headline (soup):
+    headline=''
+    headline_txt=soup.find('h1', attrs={'class': 'story-body__h1' }) or soup.find('h1', attrs={ 'class': 'story-headline'})
+    if headline_txt != None:
+        headline=headline_txt.text
+    return headline
+
+def get_summary(article):
+    summary=''
+    summ = article.find('p', attrs={'class': 'media__summary'})               # article's summary
+    if summ!= None:
+       summary=summ.text
+    return summary
+
+def get_authors(body):
+    authors=[]
+    authors_txt = body.find('span', attrs={'class': 'byline__name'})           # get the authors of the article
+    if authors_txt!= None:
+        authors_txt = body.find('span', attrs={'class': 'byline__name'}).text  
+        names = authors_txt.split('By ')
+        if '' in names:
+            names.remove('')
+            authors = names
+    return authors
+
+def get_keywords(soup):
+     keywords=[]
+     tag=soup.find('ul', attrs={'class': 'tags-list'})
+     if tag != None:
+         tags=tag.find_all('li')
+         for i in tags:
+             keyword=i.text
+             keywords.append(keyword)
+     return keywords
 
 # get html page    
 def getHTMLPage(link):
@@ -17,6 +58,7 @@ def getHTMLPage(link):
     #page = urllib.request.urlopen(link).read()                         # query the website and return the html to the variable 'page'
     soup = BeautifulSoup(page.text, 'html.parser')                       # parse the html using beautiful soup and store in variable 'soup'
     return soup
+
 
 class ScrapPage(object):
     def __init__(self,link):
@@ -37,60 +79,23 @@ class ScrapArticles(object):
         self.authors=[]
         self.content=''
         self.keywords=[]
+        
     
     # get the composants of the article
     def run(self,article,link): 
         url =  article.find('a', attrs={'class': 'media__link'})   # url of an article from href attribute
         if url !=None:
             self.url= url.get('href')
-            if ("https://www." not in self.url) or ("http://www." not in self.url):
-                self.url = link + self.url                                      
-            summ = article.find('p', attrs={'class': 'media__summary'})               # article's summary
-            if summ!= None:
-                 self.summary=summ.text
+            self.url =urljoin(link , self.url  ) 
+            self.summary = get_summary(article)                                   
             soup=getHTMLPage(self.url)
             if soup!=None:
                 body = soup.find('div', attrs={'class': 'story-body'})
                 if body != None:
-                    content=body.find('div', attrs={'property': 'articleBody'})       # get the content of the article
-                    if content != None:
-                        for i in content.find_all(['script','figure','div']):            # Clean the content from superflu
-                            i.decompose()
-                        self.content=content.text
+                    self.content= get_content(body)
                     if self.content!='':
-                        title=body.find('h1', attrs={'class': 'story-body__h1'})
-                        if title != None:
-                            self.headline= title .text            # get the headline of the article
-                        authors_txt = body.find('span', attrs={'class': 'byline__name'})           # get the authors of the article
-                        if authors_txt!= None:
-                            authors_txt = body.find('span', attrs={'class': 'byline__name'}).text  
-                            names = authors_txt.split('By ')
-                            if '' in names:
-                                names.remove('')
-                            self.authors = names
+                        self.headline= get_headline(soup)            # get the headline of the article
+                        self.authors = get_authors(body)
+                        self.keywords = get_keywords(soup)
                     
-                        tag=soup.find('ul', attrs={'class': 'tags-list'})
-                        if tag != None:
-                            tags=tag.find_all('li')
-                            for i in tags:
-                                keyword=i.text
-                                self.keywords.append(keyword)
-                            
-#if url / content is empty , no need to get other fields , to handle error later for article that don't have property=articleBody in their html
-
-
-
-
-'''link='https://www.bbc.com'       
-a=ScrapPage(link)        
-articles=a.Articles()    
-for article in articles[0:4]:
-    b=ScrapArticles()
-    b.run(article,link)
-    print(b.headline)
-    print(b.authors)
-    print(b.content)
-    print(b.url)
-    print(b.summary)
-    print(b.keywords)'''
-
+                        

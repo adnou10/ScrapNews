@@ -44,7 +44,7 @@ def get_art():
 
 # Helper to get template and refresh
 def get_template(template,data=[], refresh=False):
-    return render_template(template, arts=data, refresh=refresh)
+    return render_template(template, arts=data,nbr=len(data), refresh=refresh)
 
 
 

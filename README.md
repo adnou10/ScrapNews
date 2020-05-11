@@ -29,6 +29,7 @@ The application was build using:
  - python 3.7 as the programming language
  - Flask as web developpement framework
  - beautifulsoup4 for the scrap
+ - Redis an RQ to do background job
 
 ### Issues:
 ---------------
@@ -48,4 +49,3 @@ The application was build using:
  ---------------
  https://scrap-news.herokuapp.com/
  
- issue: needs to create a job for scraping as it take much time , thus the server stop the request.

@@ -20,7 +20,7 @@ def scrap_and_save(url):
         articles=page.Articles()
         n=len(articles)
         i=0
-        for article in articles[0:4]:
+        for article in articles:
             b=scr.ScrapArticles()
             b.run(article,url)
             content=b.content

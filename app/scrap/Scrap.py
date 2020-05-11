@@ -94,7 +94,7 @@ class ScrapArticles(object):
                 if body != None:
                     self.content= get_content(body)
                     if self.content!='':
-                        self.headline= get_headline(soup)            # get the headline of the article
+                        self.headline= get_headline(soup)            
                         self.authors = get_authors(body)
                         self.keywords = get_keywords(soup)
                     

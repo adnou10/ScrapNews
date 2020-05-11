@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div>
-        <h3>url: <a>{{art['url']}}</a></h3>
+  <div style="text-align:center;width:80%;margin-left:100px;margin-top:20px;">
+   <h1><h1>{{art['headline']}}</h1></h1>
+  <hr>
+    <div >
+        <h5>url: <a href="{{art['url']}}">{{art['url']}}</a></h5>
     </div>
     <div>
-    <h1>{{art['headline']}}</h1>
-    <p> {{art['content']}}</p>
+    <h5>Story:</h5>
+    <p>  
+    {{art['content']}}</p>
     </div>
+</div>
 {% endblock %}

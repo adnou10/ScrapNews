@@ -65,7 +65,8 @@ class ScrapArticles(object):
                         if authors_txt!= None:
                             authors_txt = body.find('span', attrs={'class': 'byline__name'}).text  
                             names = authors_txt.split('By ')
-                            names.remove('')
+                            if '' in names:
+                                names.remove('')
                             self.authors = names
                     
                         tag=soup.find('ul', attrs={'class': 'tags-list'})

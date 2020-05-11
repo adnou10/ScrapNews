@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form class="form-inline mr-auto" action='/search' method="post" >
-    <div class="form-group" style="margin:50px;"><input class="form-control search-field" type="search" name="key" id="key"/><label for="key"> <div style="margin:10px;"><i class="fa fa-search"></i></div></label></div>
+    <form class="form-inline mr-auto" action='/search' method="post" style="float:right;" >
+    <div class="form-group" > <h3> Enter Keyword : </h3><input class="form-control search-field" type="search" name="key" id="key"/><label for="key"> <div style="margin:auto;"><i class="fa fa-search"></i></div></label></div>
     </form>
-<div> </div>
-    <div class="table-responsive" style="padding-left:100px;">
+<div> {% if refresh %}
+        <meta http-equiv="refresh" content="10" >
+        <img class="col-sm-3 col-sm-offset-4" src="../static/img/spinner.gif" style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
+      {% else %}</div>
+    <div class="table-responsive" style="padding-left:100px;" >
     <h3 style="margin-left:50px;">Articles: </h3>
+    
     <table class="table" style="">
                
         <tbody>
@@ -19,5 +23,6 @@
         </tbody>
     
     </table>
+    {% endif %}
 </div>
 {% endblock %}

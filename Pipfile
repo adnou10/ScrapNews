@@ -15,6 +15,10 @@ requests = "*"
 flask-testing = "*"
 flask-restful = "*"
 gunicorn = "*"
+rq = "*"
+redis = "*"
+flask-rq2 = "*"
+pipfile = "*"
 
 [requires]
 python_version = "3.7"

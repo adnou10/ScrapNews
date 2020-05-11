@@ -19,7 +19,7 @@ def scrap_and_save(url):
         page=scr.ScrapPage(url)            # Using our Scrap module to scrap the website
         articles=page.Articles()
         n=len(articles)
-        i=0
+        #i=0
         for article in articles:
             b=scr.ScrapArticles()
             b.run(article,url)
@@ -32,9 +32,11 @@ def scrap_and_save(url):
                 keywords=b.keywords
                 json=tjs.ToJson(authors,content,url_art,headline,keywords,summary)
                 article = Article(**json).save()
-                print(json['headline'])
+                json['id']=article.id
+                #print(json['headline'])
                 data.append(json)
                 #time.sleep(5)
-                i += 1
+                #i += 1
+        #data=Article.objects()
         return data
     

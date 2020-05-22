@@ -7,5 +7,5 @@ class Config(object):
    
     #Our Mongodb settings / MongoDb Atlas URI
     MONGODB_SETTINGS = {
-    'host': 'mongodb+srv://testuser:0000@articles-ce4va.mongodb.net/apptest?retryWrites=true&w=majority'
+    'host': 'mongodb+srv://<userxxx>:<passwordxxx>@articles-ce4va.mongodb.net/<dbname>?retryWrites=true&w=majority'
 }

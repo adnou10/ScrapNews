@@ -4,7 +4,6 @@ from app import app, models
 
 
 class BaseTestCase(TestCase):
-    """A base test case for flask-tracking."""
     
     def setUp(self):
         self.app = app.test_client()
